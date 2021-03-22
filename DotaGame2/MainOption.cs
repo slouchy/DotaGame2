@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DotaGame2.Interface;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -26,16 +27,17 @@ namespace DotaGame2
             var userInput = "";
             var isAttack = false;
             var isOver = false;
-            var person = new Person();
+            IPerson person;
 
             switch (userInput.ToLower())
             {
                 case "soldier":
-                    person.Generate();
+                    person = new Person();
+                    isAttack = person.Generate();
                     break;
                 case "villager":
                     person = new Person();
-                    person.Generate();
+                    isAttack = person.Generate();
                     break;
                 case "level":
                     var cityLevel = new CityLevel();
@@ -54,7 +56,8 @@ namespace DotaGame2
 
             if (!isOver)
             {
-                isOver = person.CollectResource();
+                person = new Person();
+                person.CollectResource();
             }
 
             return isOver;

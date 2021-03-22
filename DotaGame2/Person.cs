@@ -1,17 +1,18 @@
-﻿using System;
+﻿using DotaGame2.Interface;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DotaGame2
 {
-    class Person
+    public class Person : IPerson
     {
-        internal void Generate()
+        void CollectResource()
         {
             throw new NotImplementedException();
         }
 
-        internal bool CollectResource()
+        bool Generate()
         {
             throw new NotImplementedException();
         }
