@@ -13,6 +13,8 @@ namespace DotaGame2
 
         internal bool Attack()
         {
+            var info = LoadInfo();
+
             var isOver = false;
             if (!_attackStatus)
             {
@@ -26,6 +28,11 @@ namespace DotaGame2
             }
 
             return isOver;
+        }
+
+        private object LoadInfo()
+        {
+            throw new NotImplementedException();
         }
 
         private bool EnemyAttackTurn()
