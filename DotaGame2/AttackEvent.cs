@@ -64,6 +64,35 @@ namespace DotaGame2
 
         private bool EnemyAttack(string[] people)
         {
+            var person = LoadAttackedPerson(people);
+            var personLife = EnemyAttackPerson();
+            var isOver = false;
+            if (personLife <= 0)
+            {
+                SetPersonDie(person);
+            }
+
+            ShowAttackedStatus();
+            return isOver;
+        }
+
+        private float EnemyAttackPerson()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SetPersonDie(object person)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ShowAttackedStatus()
+        {
+            throw new NotImplementedException();
+        }
+
+        private object LoadAttackedPerson(string[] people)
+        {
             throw new NotImplementedException();
         }
 
