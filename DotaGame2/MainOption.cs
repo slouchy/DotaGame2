@@ -21,9 +21,9 @@ namespace DotaGame2
 
         }
 
-        public void MainOptions()
+        public bool MainOptions()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public void SetGameOver()

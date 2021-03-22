@@ -12,7 +12,7 @@ namespace DotaGame2
             {
                 main.ShowInfo();
                 main.ShowOptions();
-                main.MainOptions();
+                isOver = main.MainOptions();
             }
 
             main.SetGameOver();
