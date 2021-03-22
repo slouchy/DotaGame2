@@ -20,7 +20,49 @@ namespace DotaGame2
             }
 
             isOver = UserAttackTurn();
+            if (!isOver)
+            {
+                isOver = EnemyAttackTurn();
+            }
+
             return isOver;
+        }
+
+        private bool EnemyAttackTurn()
+        {
+            var soliders = new string[] { };
+            var villagers = new string[] { };
+            var isOver = false;
+            if (soliders.Length <= 0 && villagers.Length <= 0)
+            {
+                SetGameFail();
+                isOver = true;
+                return isOver;
+            }
+
+            var isEnemyAttack = false;
+            isOver = false;
+            if (soliders.Length > 0)
+            {
+                isEnemyAttack = EnemyAttack(soliders);
+            }
+
+            if (!isEnemyAttack)
+            {
+                EnemyAttack(villagers);
+            }
+
+            return isOver;
+        }
+
+        private bool EnemyAttack(string[] people)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SetGameFail()
+        {
+            throw new NotImplementedException();
         }
 
         private bool UserAttackTurn()
