@@ -2,7 +2,7 @@
 {
     public interface IPerson
     {
-        void CollectResource();
+        int CollectResource();
 
         bool Generate();
     }

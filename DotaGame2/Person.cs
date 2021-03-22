@@ -7,14 +7,35 @@ namespace DotaGame2
 {
     public class Person : IPerson
     {
-        void CollectResource()
+        int IPerson.CollectResource()
+        {
+            var people = new string[] { };
+            var resource = 0;
+            for (int i = 0; i < people.Length; i++)
+            {
+                var isCollectioned = false;
+                if (!isCollectioned)
+                {
+                    resource++;
+                    isCollectioned = true;
+                }
+                else
+                {
+                    isCollectioned = false;
+                }
+            }
+
+            return resource;
+        }
+
+        bool IPerson.Generate()
         {
             throw new NotImplementedException();
         }
 
-        bool Generate()
+        private void DoCollect()
         {
-            throw new NotImplementedException();
+
         }
     }
 }

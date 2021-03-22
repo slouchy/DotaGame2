@@ -59,7 +59,7 @@ namespace DotaGame2
             if (!isOver)
             {
                 person = new Person();
-                person.CollectResource();
+               var totalResource = person.CollectResource();
             }
 
             return isOver;
