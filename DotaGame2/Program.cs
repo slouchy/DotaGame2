@@ -6,7 +6,16 @@ namespace DotaGame2
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var isOver = false;
+            var main = new MainOption();
+            while (!isOver)
+            {
+                main.ShowInfo();
+                main.ShowOptions();
+                main.MainOptions();
+            }
+
+            main.SetGameOver();
         }
     }
 }
