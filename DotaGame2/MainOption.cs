@@ -8,27 +8,27 @@ namespace DotaGame2
     {
         public MainOption()
         {
-
+            throw new NotImplementedException();
         }
 
         public void ShowInfo()
         {
-
+            throw new NotImplementedException();
         }
 
         public void ShowOptions()
         {
-
+            throw new NotImplementedException();
         }
 
         public bool MainOptions()
         {
-            return true;
+            throw new NotImplementedException();
         }
 
         public void SetGameOver()
         {
-
+            throw new NotImplementedException();
         }
     }
 }
