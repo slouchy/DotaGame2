@@ -8,7 +8,7 @@ namespace DotaGame2
         {
         }
 
-        internal void LevelUp()
+        internal bool LevelUp()
         {
             throw new NotImplementedException();
         }

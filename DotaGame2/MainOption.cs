@@ -24,10 +24,15 @@ namespace DotaGame2
 
         public bool MainOptions()
         {
-            var userInput = "";
-            var isAttack = false;
-            var isOver = false;
             IPerson person;
+            var userInput = ("").ToLower();
+            var isAttack = false;
+            bool isOver;
+            if (userInput == "quit")
+            {
+                isOver = IsOver();
+                return isOver;
+            }
 
             switch (userInput.ToLower())
             {
@@ -41,13 +46,10 @@ namespace DotaGame2
                     break;
                 case "level":
                     var cityLevel = new CityLevel();
-                    cityLevel.LevelUp();
+                    isAttack = cityLevel.LevelUp();
                     break;
                 case "skip":
-                    isAttack = true;
-                    break;
-                case "Quit":
-                    isOver = true;
+                    isAttack = IsAttack();
                     break;
             }
 
@@ -66,6 +68,17 @@ namespace DotaGame2
         public void SetGameOver()
         {
             throw new NotImplementedException();
+        }
+
+        private bool IsAttack()
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool IsOver()
+        {
+            throw new NotImplementedException();
+
         }
     }
 }
