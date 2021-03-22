@@ -13,15 +13,14 @@ namespace DotaGame2
             var resource = 0;
             for (int i = 0; i < people.Length; i++)
             {
-                var isCollectioned = false;
-                if (!isCollectioned)
+                if (!IsVillagerCollectioned())
                 {
-                    resource++;
-                    isCollectioned = true;
+                    DoCollect();
+                    SetCollectioned(true);
                 }
                 else
                 {
-                    isCollectioned = false;
+                    SetCollectioned(false);
                 }
             }
 
@@ -35,6 +34,19 @@ namespace DotaGame2
 
         private void DoCollect()
         {
+            throw new NotImplementedException();
+
+        }
+
+        private void SetCollectioned(bool isCollected)
+        {
+            throw new NotImplementedException();
+
+        }
+
+        private bool IsVillagerCollectioned()
+        {
+            throw new NotImplementedException();
 
         }
     }
