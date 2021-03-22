@@ -54,7 +54,7 @@ namespace DotaGame2
                 isEnemyAttack = EnemyAttack(soliders);
             }
 
-            if (!isEnemyAttack)
+            if (villagers.Length >0 && !isEnemyAttack)
             {
                 EnemyAttack(villagers);
             }
