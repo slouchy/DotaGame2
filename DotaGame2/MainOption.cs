@@ -19,7 +19,7 @@ namespace DotaGame2
 
         public void ShowOptions()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Choose Options (1)soldier, (2)villager, (3)level, (4)skip, (5)Quit [Input 1,2,3,4,5]");
         }
 
         public bool MainOptions()
