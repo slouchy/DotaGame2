@@ -9,10 +9,10 @@ namespace DotaGame2
 {
     public class MainOption
     {
-        private static List<IPerson> _vilagers;
-        private static List<IPerson> _soliders;
-        private static List<IResource> _resources;
-        private static List<IEemeny> _emenies;
+        public static List<IPerson> _vilagers;
+        public static List<IPerson> _soliders;
+        public static List<IResource> _resources;
+        public static List<IEemeny> _emenies;
 
         public MainOption()
         {

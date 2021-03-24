@@ -1,6 +1,6 @@
 ﻿namespace DotaGame2.Interface
 {
-    internal interface IResource
+    public interface IResource
     {
         int HaveResourceCount { get; set; }
     }
