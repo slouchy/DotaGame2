@@ -4,6 +4,5 @@
     {
         int CollectResource();
 
-        bool Generate();
     }
 }

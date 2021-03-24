@@ -9,14 +9,14 @@ namespace DotaGame2
 {
     public class MainOption
     {
-        public static List<IPerson> _vilagers;
+        public static List<IPerson> _villagers;
         public static List<IPerson> _soliders;
         public static List<IResource> _resources;
         public static List<IEemeny> _emenies;
 
         public MainOption()
         {
-            _vilagers = new List<IPerson>();
+            _villagers = new List<IPerson>();
             _soliders = new List<IPerson>();
             _resources = new List<IResource>()
             {
@@ -37,7 +37,7 @@ namespace DotaGame2
         public void ShowInfo()
         {
             var message =
-                $"村民數：{_vilagers.Count}, \r\n" +
+                $"村民數：{_villagers.Count}, \r\n" +
                 $"士兵：{_soliders.Count}, \r\n" +
                 $"資源數：{string.Join(" | ", _resources.Select(x => x.HaveResourceCount))},  \r\n" +
                 $"敵人血量：{string.Join(" | ", _emenies.Select(x => x.Life))} \r\n";
@@ -52,7 +52,6 @@ namespace DotaGame2
 
         public bool MainOptions()
         {
-            IPerson person;
             var userInput = ("").ToLower();
             var isAttack = false;
             bool isOver;
@@ -67,15 +66,17 @@ namespace DotaGame2
                 case "soldier":
                     if (CheckResourceAndMinus(userInput))
                     {
-                        person = new Person();
-                        isAttack = person.Generate();
+                        IPerson person = new Person(Enums.Person.Solider);
+                        _soliders.Add(person);
+                        isAttack = GetAttackStatus(true);
                     }
                     break;
                 case "villager":
                     if (CheckResourceAndMinus(userInput))
                     {
-                        person = new Person();
-                        isAttack = person.Generate();
+                        IPerson person = new Person(Enums.Person.Villager);
+                        _villagers.Add(person);
+                        isAttack = GetAttackStatus(true);
                     }
 
                     break;
@@ -87,7 +88,7 @@ namespace DotaGame2
                     }
                     break;
                 case "skip":
-                    isAttack = GetAttackStatus();
+                    isAttack = GetAttackStatus(true);
                     break;
             }
 
@@ -96,7 +97,7 @@ namespace DotaGame2
 
             if (!isOver)
             {
-                person = new Person();
+                IPerson person = new Person(Enums.Person.Villager);
                 var totalResource = 0;
                 totalResource += person.CollectResource();
             }
@@ -136,9 +137,9 @@ namespace DotaGame2
             }
         }
 
-        private bool GetAttackStatus()
+        private bool GetAttackStatus(bool isAttack)
         {
-            return true;
+            return isAttack;
         }
 
         private bool GetOverStatus()

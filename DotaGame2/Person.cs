@@ -1,4 +1,5 @@
 ﻿using DotaGame2.Interface;
+using DotaGame2.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,7 +8,15 @@ namespace DotaGame2
 {
     public class Person : IPerson
     {
+        private Enums.Person _personType;
+
+        public Person(Enums.Person type)
+        {
+            _personType = type;
+        }
+
         int IPerson.CollectResource()
+
         {
             var people = new string[] { };
             var resource = 0;
@@ -25,50 +34,6 @@ namespace DotaGame2
             }
 
             return resource;
-        }
-
-        bool IPerson.Generate()
-        {
-            var resource = LoadGenerateInfo();
-            var useResource = 0;
-            var isAttack = false;
-            if (resource < useResource)
-            {
-                ShowResourceNotEnough();
-                isAttack = IsAttack(false);
-                return isAttack;
-            }
-
-            resource = DeductResource(resource, useResource);
-            ShowGenerateSuccess();
-            isAttack = IsAttack(true);
-            return isAttack;
-
-        }
-
-        private void ShowGenerateSuccess()
-        {
-            throw new NotImplementedException();
-        }
-
-        private int DeductResource(int resource, int useResource)
-        {
-            throw new NotImplementedException();
-        }
-
-        private bool IsAttack(bool isAttack)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void ShowResourceNotEnough()
-        {
-            throw new NotImplementedException();
-        }
-
-        private int LoadGenerateInfo()
-        {
-            throw new NotImplementedException();
         }
 
         private void DoCollect()
