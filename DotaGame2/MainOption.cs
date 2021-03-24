@@ -65,16 +65,26 @@ namespace DotaGame2
             switch (userInput.ToLower())
             {
                 case "soldier":
-                    person = new Person();
-                    isAttack = person.Generate();
+                    if (CheckResourceAndMinus(userInput))
+                    {
+                        person = new Person();
+                        isAttack = person.Generate();
+                    }
                     break;
                 case "villager":
-                    person = new Person();
-                    isAttack = person.Generate();
+                    if (CheckResourceAndMinus(userInput))
+                    {
+                        person = new Person();
+                        isAttack = person.Generate();
+                    }
+
                     break;
                 case "level":
-                    var cityLevel = new CityLevel();
-                    isAttack = cityLevel.LevelUp();
+                    if (CheckResourceAndMinus(userInput))
+                    {
+                        var cityLevel = new CityLevel();
+                        isAttack = cityLevel.LevelUp();
+                    }
                     break;
                 case "skip":
                     isAttack = GetAttackStatus();
@@ -97,6 +107,33 @@ namespace DotaGame2
         public void SetGameOver()
         {
             Console.WriteLine("Game Over");
+        }
+
+        private bool CheckResourceAndMinus(string userInput)
+        {
+            int cost = 0;
+            switch (userInput.ToLower())
+            {
+                case "soldier":
+                    cost = 30;
+                    break;
+                case "villager":
+                    cost = 10;
+                    break;
+                case "level":
+                    cost = 15;
+                    break;
+            }
+
+            if (_resources.First().HaveResourceCount - cost < 0)
+            {
+                return false;
+            }
+            else
+            {
+                _resources.First().HaveResourceCount -= cost;
+                return true;
+            }
         }
 
         private bool GetAttackStatus()
