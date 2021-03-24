@@ -2,6 +2,7 @@
 using DotaGame2.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DotaGame2
@@ -21,21 +22,27 @@ namespace DotaGame2
             {
                 new ResourceModel
                 {
-                    haveResourceCount = 100
+                    HaveResourceCount = 100
                 }
             };
             _emenies = new List<IEemeny>()
             {
                 new EemenyModel
                 {
-                    life = 100
+                    Life = 100
                 }
             };
         }
 
         public void ShowInfo()
         {
-            throw new NotImplementedException();
+            var message =
+                $"村民數：{_vilagers.Count}, \r\n" +
+                $"士兵：{_soliders.Count}, \r\n" +
+                $"資源數：{string.Join(" | ", _resources.Select(x => x.HaveResourceCount))},  \r\n" +
+                $"敵人血量：{string.Join(" | ", _emenies.Select(x => x.Life))} \r\n";
+            Console.WriteLine(message);
+
         }
 
         public void ShowOptions()
