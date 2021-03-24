@@ -1,4 +1,5 @@
 ﻿using DotaGame2.Interface;
+using DotaGame2.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,10 +8,29 @@ namespace DotaGame2
 {
     public class MainOption
     {
+        private static List<IPerson> _vilagers;
+        private static List<IPerson> _soliders;
+        private static List<IResource> _resources;
+        private static List<IEemeny> _emenies;
 
         public MainOption()
         {
-            throw new NotImplementedException();
+            _vilagers = new List<IPerson>();
+            _soliders = new List<IPerson>();
+            _resources = new List<IResource>()
+            {
+                new ResourceModel
+                {
+                    haveResourceCount = 100
+                }
+            };
+            _emenies = new List<IEemeny>()
+            {
+                new EemenyModel
+                {
+                    life = 100
+                }
+            };
         }
 
         public void ShowInfo()
