@@ -7,6 +7,7 @@ namespace DotaGame2
 {
     public class MainOption
     {
+
         public MainOption()
         {
             throw new NotImplementedException();
@@ -68,7 +69,7 @@ namespace DotaGame2
 
         public void SetGameOver()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Game Over");
         }
 
         private bool IsAttack()
