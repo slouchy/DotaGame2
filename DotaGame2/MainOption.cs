@@ -79,8 +79,7 @@ namespace DotaGame2
 
         private bool GetOverStatus()
         {
-            throw new NotImplementedException();
-
+            return true;
         }
     }
 }
