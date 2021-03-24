@@ -74,7 +74,7 @@ namespace DotaGame2
 
         private bool IsAttack()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         private bool IsOver()
