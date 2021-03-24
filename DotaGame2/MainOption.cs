@@ -31,7 +31,7 @@ namespace DotaGame2
             bool isOver;
             if (userInput == "quit")
             {
-                isOver = IsOver();
+                isOver = GetOverStatus();
                 return isOver;
             }
 
@@ -50,7 +50,7 @@ namespace DotaGame2
                     isAttack = cityLevel.LevelUp();
                     break;
                 case "skip":
-                    isAttack = IsAttack();
+                    isAttack = GetAttackStatus();
                     break;
             }
 
@@ -72,12 +72,12 @@ namespace DotaGame2
             Console.WriteLine("Game Over");
         }
 
-        private bool IsAttack()
+        private bool GetAttackStatus()
         {
             return true;
         }
 
-        private bool IsOver()
+        private bool GetOverStatus()
         {
             throw new NotImplementedException();
 
