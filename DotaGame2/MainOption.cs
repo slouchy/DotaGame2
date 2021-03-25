@@ -104,7 +104,6 @@ namespace DotaGame2
                 isOver = DoAttack();
             }
 
-
             if (!isOver)
             {
                 UpdateResourceCount();
@@ -117,13 +116,13 @@ namespace DotaGame2
         {
             var attackEvent = new AttackEvent();
             var soliderCount = GetSoliderCount();
-            var nLife = attackEvent.UserAttack(soliderCount, _emenies.FirstOrDefault().Life);
+            var enemyLife = attackEvent.UserAttack(soliderCount, _emenies.FirstOrDefault().Life);
 
-            bool isOver = nLife <= 0;
-            _emenies.FirstOrDefault().Life = nLife;
+            bool isOver = enemyLife <= 0;
+            _emenies.FirstOrDefault().Life = enemyLife;
             if (!isOver)
             {
-                var attackTarget = _soliders.OrderBy(x => x.Life).FirstOrDefault() ?? _villagers.OrderBy(x => x.Life).FirstOrDefault();
+                var attackTarget = GetAttackTarget();
                 if (attackTarget == null)
                 {
                     SetGameOver();
@@ -137,6 +136,11 @@ namespace DotaGame2
             }
 
             return isOver;
+        }
+
+        private static IPerson GetAttackTarget()
+        {
+            return _soliders.OrderBy(x => x.Life).FirstOrDefault() ?? _villagers.OrderBy(x => x.Life).FirstOrDefault();
         }
 
         private static void SetAttackedStatus(IPerson attackTarget, float remainingLife)
