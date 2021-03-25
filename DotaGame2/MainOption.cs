@@ -13,6 +13,7 @@ namespace DotaGame2
         public static List<IPerson> _soliders;
         public static List<IResource> _resources;
         public static List<IEemeny> _emenies;
+        public static LevelModel _level;
 
         public MainOption()
         {
@@ -31,6 +32,10 @@ namespace DotaGame2
                 {
                     Life = 100
                 }
+            };
+            _level = new LevelModel
+            {
+                Lv = 1
             };
         }
 
@@ -81,10 +86,10 @@ namespace DotaGame2
 
                     break;
                 case "level":
-                    if (CheckResourceAndMinus(userInput))
+                    if (CheckResourceAndMinus(userInput.ToLower()))
                     {
-                        var cityLevel = new CityLevel();
-                        isAttack = cityLevel.LevelUp();
+                        LevelUp();
+                        isAttack = GetAttackStatus(true);
                     }
                     break;
                 case "skip":
@@ -145,6 +150,11 @@ namespace DotaGame2
         private bool GetOverStatus()
         {
             return true;
+        }
+
+        private void LevelUp()
+        {
+            _level.Lv += 1;
         }
     }
 }
