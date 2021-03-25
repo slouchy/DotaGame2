@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DotaGame2.Interface;
+using System;
 
 namespace DotaGame2
 {
@@ -22,6 +23,12 @@ namespace DotaGame2
             }
 
             return enemyLife;
+        }
+
+        internal float EnemyAttack(float life)
+        {
+            life -= 20;
+            return life;
         }
 
         private object LoadInfo()
@@ -114,6 +121,7 @@ namespace DotaGame2
 
             return isOver;
         }
+
 
         private void setGameSuccess()
         {

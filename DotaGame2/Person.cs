@@ -10,7 +10,11 @@ namespace DotaGame2
     {
         private Enums.Person _personType;
 
+        public Guid Id { get; set; } = Guid.NewGuid();
+
         public bool IsCollected { get; set; }
+
+        public float Life { get; set; }
 
         public Person(Enums.Person type)
         {

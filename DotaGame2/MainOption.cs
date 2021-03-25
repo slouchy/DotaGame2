@@ -72,6 +72,7 @@ namespace DotaGame2
                     if (CheckResourceAndMinus(userInput))
                     {
                         IPerson person = new Person(Enums.Person.Solider);
+                        person.Life = 30;
                         _soliders.Add(person);
                         isAttack = GetAttackStatus(true);
                     }
@@ -80,6 +81,7 @@ namespace DotaGame2
                     if (CheckResourceAndMinus(userInput))
                     {
                         IPerson person = new Person(Enums.Person.Villager);
+                        person.Life = 20;
                         _villagers.Add(person);
                         isAttack = GetAttackStatus(true);
                     }
@@ -119,8 +121,35 @@ namespace DotaGame2
 
             bool isOver = nLife <= 0;
             _emenies.FirstOrDefault().Life = nLife;
-            
+            if (!isOver)
+            {
+                var attackTarget = _soliders.OrderBy(x => x.Life).FirstOrDefault() ?? _villagers.OrderBy(x => x.Life).FirstOrDefault();
+                if (attackTarget == null)
+                {
+                    SetGameOver();
+                    isOver = GetOverStatus();
+                }
+                else
+                {
+                    var remainingLife = attackEvent.EnemyAttack(attackTarget.Life);
+                    SetAttackedStatus(attackTarget, remainingLife);
+                }
+            }
+
             return isOver;
+        }
+
+        private static void SetAttackedStatus(IPerson attackTarget, float remainingLife)
+        {
+            if (remainingLife <= 0)
+            {
+                _soliders.Remove(attackTarget);
+                _villagers.Remove(attackTarget);
+            }
+            else
+            {
+                attackTarget.Life = remainingLife;
+            }
         }
 
         public void SetGameOver()
