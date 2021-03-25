@@ -140,7 +140,17 @@ namespace DotaGame2
 
         private static IPerson GetAttackTarget()
         {
-            return _soliders.OrderBy(x => x.Life).FirstOrDefault() ?? _villagers.OrderBy(x => x.Life).FirstOrDefault();
+            if (_soliders.Any())
+            {
+                return _soliders.First();
+            }
+
+            if (_villagers.Any())
+            {
+                return _villagers.First();
+            }
+
+            return null;
         }
 
         private static void SetAttackedStatus(IPerson attackTarget, float remainingLife)
