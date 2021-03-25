@@ -59,7 +59,7 @@ namespace DotaGame2
         {
             var userInput = ("").ToLower();
             var isAttack = false;
-            bool isOver;
+            bool isOver = false;
             if (userInput == "quit")
             {
                 isOver = GetOverStatus();
@@ -97,14 +97,29 @@ namespace DotaGame2
                     break;
             }
 
-            var attackEvent = new AttackEvent(isAttack);
-            isOver = attackEvent.Attack();
+            if (isAttack)
+            {
+                isOver = DoAttack();
+            }
+
 
             if (!isOver)
             {
                 UpdateResourceCount();
             }
 
+            return isOver;
+        }
+
+        private bool DoAttack()
+        {
+            var attackEvent = new AttackEvent();
+            var soliderCount = GetSoliderCount();
+            var nLife = attackEvent.UserAttack(soliderCount, _emenies.FirstOrDefault().Life);
+
+            bool isOver = nLife <= 0;
+            _emenies.FirstOrDefault().Life = nLife;
+            
             return isOver;
         }
 
@@ -175,6 +190,11 @@ namespace DotaGame2
         private void SetVillagerCollectStatus(IPerson villager)
         {
             villager.IsCollected = !villager.IsCollected;
+        }
+
+        private int GetSoliderCount()
+        {
+            return _soliders.Count;
         }
     }
 }

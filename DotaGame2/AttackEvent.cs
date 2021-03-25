@@ -4,30 +4,24 @@ namespace DotaGame2
 {
     internal class AttackEvent
     {
-        private bool _attackStatus;
 
-        public AttackEvent(bool isAttack)
+        public AttackEvent()
         {
-            _attackStatus = isAttack;
         }
 
-        internal bool Attack()
+        internal float UserAttack(int soliderCount, float enemyLife)
         {
-            var info = LoadInfo();
-
-            var isOver = false;
-            if (!_attackStatus)
+            for (int i = 0; i < soliderCount; i++)
             {
-                return isOver;
+                enemyLife -= 10;
+                if (enemyLife <= 0)
+                {
+                    setGameSuccess();
+                    break;
+                }
             }
 
-            isOver = UserAttackTurn();
-            if (!isOver)
-            {
-                isOver = EnemyAttackTurn();
-            }
-
-            return isOver;
+            return enemyLife;
         }
 
         private object LoadInfo()
@@ -54,7 +48,7 @@ namespace DotaGame2
                 isEnemyAttack = EnemyAttack(soliders);
             }
 
-            if (villagers.Length >0 && !isEnemyAttack)
+            if (villagers.Length > 0 && !isEnemyAttack)
             {
                 EnemyAttack(villagers);
             }
@@ -123,7 +117,7 @@ namespace DotaGame2
 
         private void setGameSuccess()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("You win!!");
         }
 
         private int SetEnemyLife(int attack)
