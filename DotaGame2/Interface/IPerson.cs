@@ -3,8 +3,5 @@
     public interface IPerson
     {
         bool IsCollected { get; set; }
-
-        int CollectResource();
-
     }
 }
