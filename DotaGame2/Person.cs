@@ -10,6 +10,8 @@ namespace DotaGame2
     {
         private Enums.Person _personType;
 
+        public bool IsCollected { get; set; }
+
         public Person(Enums.Person type)
         {
             _personType = type;

@@ -102,9 +102,7 @@ namespace DotaGame2
 
             if (!isOver)
             {
-                IPerson person = new Person(Enums.Person.Villager);
-                var totalResource = 0;
-                totalResource += person.CollectResource();
+                UpdateResourceCount();
             }
 
             return isOver;
@@ -155,6 +153,28 @@ namespace DotaGame2
         private void LevelUp()
         {
             _level.Lv += 1;
+        }
+
+        private void UpdateResourceCount()
+        {
+            var getResourceCount = GetCollectionVillagers();
+            _resources.FirstOrDefault().HaveResourceCount += 10 * getResourceCount;
+        }
+
+        private int GetCollectionVillagers()
+        {
+            var canCollectResourceCount = _villagers.Count(x => !x.IsCollected);
+            foreach (var villager in _villagers)
+            {
+                SetVillagerCollectStatus(villager);
+            }
+
+            return canCollectResourceCount;
+        }
+
+        private void SetVillagerCollectStatus(IPerson villager)
+        {
+            villager.IsCollected = !villager.IsCollected;
         }
     }
 }
