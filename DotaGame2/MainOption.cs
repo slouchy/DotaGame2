@@ -80,9 +80,7 @@ namespace DotaGame2
                 case "villager":
                     if (CheckResourceAndMinus(userInput))
                     {
-                        IPerson person = new Person(Enums.Person.Villager);
-                        person.Life = 20;
-                        _villagers.Add(person);
+                        GenerateVillager();
                         isAttack = GetAttackStatus(true);
                     }
 
@@ -110,6 +108,25 @@ namespace DotaGame2
             }
 
             return isOver;
+        }
+
+        private void GenerateVillager()
+        {
+            Console.WriteLine("Choose Villager sex: Man or Woman?");
+            var userInput = Console.ReadLine().ToLower();
+            IPerson person = new VillagerModel();
+
+            switch (userInput)
+            {
+                case "man":
+                    person.Type = Enums.Person.ManVillager;
+                    break;
+                case "woman":
+                    person.Type = Enums.Person.WomanVillager;
+                    break;
+            }
+
+            _villagers.Add(person);
         }
 
         private bool DoAttack()

@@ -5,7 +5,8 @@
         public enum Person
         {
             Solider,
-            Villager
+            ManVillager,
+            WomanVillager,
         }
     }
 }

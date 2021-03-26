@@ -15,6 +15,9 @@ namespace DotaGame2
         public bool IsCollected { get; set; }
 
         public float Life { get; set; }
+        public Enums.Person Type { get; set; }
+
+        public int Cost => throw new NotImplementedException();
 
         public Person(Enums.Person type)
         {
