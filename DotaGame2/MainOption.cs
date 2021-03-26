@@ -69,13 +69,7 @@ namespace DotaGame2
             switch (userInput.ToLower())
             {
                 case "soldier":
-                    if (CheckResourceAndMinus(userInput))
-                    {
-                        IPerson person = new Person(Enums.Person.Solider);
-                        person.Life = 30;
-                        _soliders.Add(person);
-                        isAttack = GetAttackStatus(true);
-                    }
+                    isAttack = GenerateSoldier();
                     break;
                 case "villager":
                     if (CheckResourceAndMinus(userInput))
@@ -83,7 +77,6 @@ namespace DotaGame2
                         GenerateVillager();
                         isAttack = GetAttackStatus(true);
                     }
-
                     break;
                 case "level":
                     if (CheckResourceAndMinus(userInput.ToLower()))
@@ -108,6 +101,73 @@ namespace DotaGame2
             }
 
             return isOver;
+        }
+
+        private bool GenerateSoldier()
+        {
+            Console.WriteLine("Choose Solider type: Halberd(30), Archer(30), Infantry(35), Cavalry(50)? ");
+            var userInput = Console.ReadLine().ToLower();
+            IPerson person;
+            var isAttack = true;
+            switch (userInput)
+            {
+                case "halberd":
+                    person = new HalberdModel()
+                    {
+                        Life = 30,
+                        Cost = 30,
+                        IsCollected = false,
+                        Type = Enums.Person.Halberd
+                    };
+                    break;
+                case "archer":
+                    person = new ArcherModel()
+                    {
+                        Life = 25,
+                        Cost = 30,
+                        IsCollected = false,
+                        Type = Enums.Person.Archer
+                    };
+                    break;
+                case "infantry":
+                    person = new InfantryModel()
+                    {
+                        Life = 15,
+                        Cost = 35,
+                        IsCollected = false,
+                        Type = Enums.Person.Infantry
+                    };
+                    break;
+                case "cavalry":
+                    person = new CavalryModel()
+                    {
+                        Life = 50,
+                        Cost = 50,
+                        IsCollected = false,
+                        Type = Enums.Person.Cavalry
+                    };
+                    break;
+                default:
+                    isAttack = false;
+                    person = null;
+                    break;
+            }
+
+            if (person != null)
+            {
+                if (_resources.First().HaveResourceCount - person.Cost < 0)
+                {
+                    isAttack = false;
+                }
+                else
+                {
+                    _resources.First().HaveResourceCount -= person.Cost;
+                    _soliders.Add(person);
+                    isAttack = true;
+                }
+            }
+
+            return isAttack;
         }
 
         private void GenerateVillager()

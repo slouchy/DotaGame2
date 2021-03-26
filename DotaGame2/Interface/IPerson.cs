@@ -16,6 +16,15 @@ namespace DotaGame2.Interface
         float Life { get; set; }
     }
 
+    public abstract class SoliderBase : IPerson
+    {
+        public Guid Id => Guid.NewGuid();
+        public bool IsCollected { get; set; }
+        public abstract Enums.Person Type { get; set; }
+        public abstract float Life { get; set; }
+        public abstract int Cost { get; set; }
+    }
+
     public abstract class VillagerBase : IPerson
     {
         public Guid Id => Guid.NewGuid();
