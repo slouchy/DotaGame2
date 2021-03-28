@@ -9,5 +9,8 @@ namespace DotaGame2.Interface
         bool IsCollected { get; set; }
 
         float Life { get; set; }
+
+        public int Cost { get; set; }
+
     }
 }

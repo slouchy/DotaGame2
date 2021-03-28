@@ -78,14 +78,7 @@ namespace DotaGame2
                     }
                     break;
                 case "villager":
-                    if (CheckResourceAndMinus(userInput))
-                    {
-                        IPerson person = new Person(Enums.Person.Villager);
-                        person.Life = 20;
-                        _villagers.Add(person);
-                        isAttack = GetAttackStatus(true);
-                    }
-
+                    isAttack = DoGenerateVillager();
                     break;
                 case "level":
                     if (CheckResourceAndMinus(userInput.ToLower()))
@@ -238,6 +231,30 @@ namespace DotaGame2
         private int GetSoliderCount()
         {
             return _soliders.Count;
+        }
+
+        private bool DoGenerateVillager()
+        {
+            Console.WriteLine("Choose Villager sex: Man or Woman?");
+            var userInput = Console.ReadLine().ToLower();
+            IPerson myVillager;
+            if (userInput == "man")
+            {
+                myVillager = new Person(Enums.Person.ManVillager);
+            }
+            else
+            {
+                myVillager = new Person(Enums.Person.WomanVillager);
+            }
+
+            var villagerGenerate = new VillagerGenerate(myVillager);
+            var isSuccessGenerateVillager = villagerGenerate.Generate(_resources);
+            if (isSuccessGenerateVillager)
+            {
+                _villagers.Add(myVillager);
+            }
+
+            return isSuccessGenerateVillager;
         }
     }
 }

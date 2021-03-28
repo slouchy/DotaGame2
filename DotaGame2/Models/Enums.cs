@@ -5,7 +5,21 @@
         public enum Person
         {
             Solider,
-            Villager
+            Villager,
+            ManVillager,
+            WomanVillager,
+        }
+
+        public enum GenerateEvent
+        {
+            Solider,
+            Halberd,
+            Archer,
+            Infantry,
+            Cavalry,
+            ManVillager,
+            WomanVillager,
+            Levelup,
         }
     }
 }
