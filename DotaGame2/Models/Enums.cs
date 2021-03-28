@@ -5,6 +5,10 @@
         public enum Person
         {
             Solider,
+            Halberd,
+            Archer,
+            Infantry,
+            Cavalry,
             Villager,
             ManVillager,
             WomanVillager,

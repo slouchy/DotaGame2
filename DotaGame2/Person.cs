@@ -31,9 +31,30 @@ namespace DotaGame2
                     Cost = 20;
                     Life = 15;
                     break;
+                case Enums.Person.Archer:
+                    Cost = 20;
+                    Life = 25;
+                    break;
+                case Enums.Person.Halberd:
+                    Cost = 30;
+                    Life = 30;
+                    break;
+                case Enums.Person.Cavalry:
+                    Cost = 50;
+                    Life = 50;
+                    break;
+                case Enums.Person.Infantry:
+                    Cost = 35;
+                    Life = 35;
+                    break;
                 default:
                     break;
             }
+        }
+
+        public Person()
+        {
+
         }
     }
 }
