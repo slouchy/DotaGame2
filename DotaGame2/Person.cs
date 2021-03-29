@@ -8,7 +8,11 @@ namespace DotaGame2
 {
     public class Person : IPerson
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public Guid _id { get; } = Guid.NewGuid();
+        public float _life { get; set; }
+        public List<IResource> _cost { get; set; }
+
+
 
         private Enums.Person _personType;
 
@@ -17,44 +21,21 @@ namespace DotaGame2
         public float Life { get; set; }
 
         public int Cost { get; set; }
-
-        public Person(Enums.Person type)
-        {
-            _personType = type;
-            switch (type)
-            {
-                case Enums.Person.Solider:
-                    Cost = 30;
-                    Life = 30;
-                    break;
-                case Enums.Person.Villager:
-                    Cost = 20;
-                    Life = 15;
-                    break;
-                case Enums.Person.Archer:
-                    Cost = 20;
-                    Life = 25;
-                    break;
-                case Enums.Person.Halberd:
-                    Cost = 30;
-                    Life = 30;
-                    break;
-                case Enums.Person.Cavalry:
-                    Cost = 50;
-                    Life = 50;
-                    break;
-                case Enums.Person.Infantry:
-                    Cost = 35;
-                    Life = 35;
-                    break;
-                default:
-                    break;
-            }
-        }
+        
 
         public Person()
         {
 
+        }
+
+        public void DoAttack()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DoCollect()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -12,13 +12,7 @@ namespace DotaGame2.Models
 
         public InfantryGenerate(IPerson person)
         {
-            _eventCost = new List<IResource>
-            {
-                new ResourceModel
-                {
-                    HaveResourceCount = person.Cost
-                }
-            };
+            _eventCost = person._cost;
         }
 
         protected override List<IResource> GetCostResource()

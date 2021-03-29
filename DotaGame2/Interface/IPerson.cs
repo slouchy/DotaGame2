@@ -1,16 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DotaGame2.Interface
 {
     public interface IPerson
     {
-        Guid Id { get; set; }
+        Guid _id { get; }
 
-        bool IsCollected { get; set; }
+        float _life { get; set; }
 
-        float Life { get; set; }
+        List<IResource> _cost { get; set; }
 
-        public int Cost { get; set; }
+        //void DoAttack();
 
+        //void DoCollect();
     }
 }

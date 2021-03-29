@@ -1,5 +1,7 @@
 ﻿using DotaGame2.Interface;
 using DotaGame2.Models;
+using DotaGame2.Models.Solider;
+using DotaGame2.Models.Villager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -117,8 +119,8 @@ namespace DotaGame2
                 }
                 else
                 {
-                    var remainingLife = attackEvent.EnemyAttack(attackTarget.Life);
-                    SetAttackedStatus(attackTarget, remainingLife);
+                    //var remainingLife = attackEvent.EnemyAttack(attackTarget.Life);
+                    //SetAttackedStatus(attackTarget, remainingLife);
                 }
             }
 
@@ -149,7 +151,7 @@ namespace DotaGame2
             }
             else
             {
-                attackTarget.Life = remainingLife;
+                //attackTarget.Life = remainingLife;
             }
         }
 
@@ -208,18 +210,19 @@ namespace DotaGame2
 
         private int GetCollectionVillagers()
         {
-            var canCollectResourceCount = _villagers.Count(x => !x.IsCollected);
-            foreach (var villager in _villagers)
-            {
-                SetVillagerCollectStatus(villager);
-            }
+            //var canCollectResourceCount = _villagers.Count(x => !x.IsCollected);
+            //foreach (var villager in _villagers)
+            //{
+            //    SetVillagerCollectStatus(villager);
+            //}
 
-            return canCollectResourceCount;
+            //return canCollectResourceCount;
+            throw new NotImplementedException();
         }
 
         private void SetVillagerCollectStatus(IPerson villager)
         {
-            villager.IsCollected = !villager.IsCollected;
+            //villager.IsCollected = !villager.IsCollected;
         }
 
         private int GetSoliderCount()
@@ -230,32 +233,27 @@ namespace DotaGame2
         private bool DoGenerateSoldier()
         {
             Console.WriteLine("Choose Solider type: Halberd(30), Archer(30), Infantry(35), Cavalry(50)? ");
-            var isContinue = true;
             var userInput = Console.ReadLine().ToLower();
-            IPerson person;
+            Models.Solider.Base person = null;
             switch (userInput)
             {
                 case "halberd":
-                    person = new Person(Enums.Person.Halberd);
+                    person = new HalberdSolider();
                     break;
                 case "archer":
-                    person = new Person(Enums.Person.Archer);
+                    person = new ArcherSolider();
                     break;
                 case "infantry":
-                    person = new Person(Enums.Person.Infantry);
+                    person = new InfantrySolider();
                     break;
                 case "cavalry":
-                    person = new Person(Enums.Person.Cavalry);
-                    break;
-                default:
-                    isContinue = false;
-                    person = new Person();
+                    person = new CavalrySolider();
                     break;
             }
 
-            if (!isContinue)
+            if (person == null)
             {
-                return isContinue;
+                return false;
             }
             else
             {
@@ -274,14 +272,14 @@ namespace DotaGame2
         {
             Console.WriteLine("Choose Villager sex: Man or Woman?");
             var userInput = Console.ReadLine().ToLower();
-            IPerson myVillager;
+            Models.Villager.Base myVillager;
             if (userInput == "man")
             {
-                myVillager = new Person(Enums.Person.ManVillager);
+                myVillager = new ManVillager();
             }
             else
             {
-                myVillager = new Person(Enums.Person.WomanVillager);
+                myVillager = new WomanVillager();
             }
 
             var villagerGenerate = new PersonGenerate(myVillager);
