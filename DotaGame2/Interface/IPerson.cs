@@ -10,9 +10,5 @@ namespace DotaGame2.Interface
         float _life { get; set; }
 
         List<IResource> _cost { get; set; }
-
-        //void DoAttack();
-
-        //void DoCollect();
     }
 }
