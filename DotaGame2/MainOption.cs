@@ -101,6 +101,11 @@ namespace DotaGame2
             return isOver;
         }
 
+        public void SetGameOver()
+        {
+            Console.WriteLine("Game Over");
+        }
+
         private bool DoAttack()
         {
             var isOver = false;
@@ -177,11 +182,6 @@ namespace DotaGame2
             }
         }
 
-        public void SetGameOver()
-        {
-            Console.WriteLine("Game Over");
-        }
-
         private bool CheckResourceAndMinus(string userInput)
         {
             int cost = 0;
@@ -246,12 +246,33 @@ namespace DotaGame2
             villager.IsCollected = !villager.IsCollected;
         }
 
-        private int GetSoliderCount()
+        private bool DoGenerateSoldier()
         {
-            return _soliders.Count;
+            Models.Solider.Base person = ChooseSolider();
+            if (person == null)
+            {
+                return false;
+            }
+            else
+            {
+                var soliderGnerate = new PersonGenerate(person);
+                var isSuccessGenerateVillager = soliderGnerate.Generate(_resources);
+                RecordGenerateSolider(person, isSuccessGenerateVillager);
+                var isAttack = GetIsAttack(isSuccessGenerateVillager);
+
+                return isAttack;
+            }
         }
 
-        private bool DoGenerateSoldier()
+        private static void RecordGenerateSolider(Models.Solider.Base person, bool isSuccessGenerateVillager)
+        {
+            if (isSuccessGenerateVillager)
+            {
+                _soliders.Add(person);
+            }
+        }
+
+        private static Models.Solider.Base ChooseSolider()
         {
             Console.WriteLine("Choose Solider type: Halberd(30), Archer(30), Infantry(35), Cavalry(50)? ");
             var userInput = Console.ReadLine().ToLower();
@@ -272,24 +293,34 @@ namespace DotaGame2
                     break;
             }
 
-            if (person == null)
-            {
-                return false;
-            }
-            else
-            {
-                var soliderGnerate = new PersonGenerate(person);
-                var isSuccessGenerateVillager = soliderGnerate.Generate(_resources);
-                if (isSuccessGenerateVillager)
-                {
-                    _soliders.Add(person);
-                }
-
-                return isSuccessGenerateVillager;
-            }
+            return person;
         }
 
         private bool DoGenerateVillager()
+        {
+            Models.Villager.Base myVillager = ChooseVillager();
+
+            var villagerGenerate = new PersonGenerate(myVillager);
+            var isSuccessGenerateVillager = villagerGenerate.Generate(_resources);
+            RecordGenerateVillager(myVillager, isSuccessGenerateVillager);
+            var isAttack = GetIsAttack(isSuccessGenerateVillager);
+            return isAttack;
+        }
+
+        private bool GetIsAttack(bool isAttack)
+        {
+            return isAttack;
+        }
+
+        private static void RecordGenerateVillager(Models.Villager.Base person, bool isSuccessGenerateVillager)
+        {
+            if (isSuccessGenerateVillager)
+            {
+                _villagers.Add(person);
+            }
+        }
+
+        private static Models.Villager.Base ChooseVillager()
         {
             Console.WriteLine("Choose Villager sex: Man or Woman?");
             var userInput = Console.ReadLine().ToLower();
@@ -303,14 +334,7 @@ namespace DotaGame2
                 myVillager = new WomanVillager();
             }
 
-            var villagerGenerate = new PersonGenerate(myVillager);
-            var isSuccessGenerateVillager = villagerGenerate.Generate(_resources);
-            if (isSuccessGenerateVillager)
-            {
-                _villagers.Add(myVillager);
-            }
-
-            return isSuccessGenerateVillager;
+            return myVillager;
         }
 
         private void setGameSuccess()
