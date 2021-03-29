@@ -10,11 +10,12 @@ namespace DotaGame2.Models.Solider
         {
             _life = 20;
             _cost = new List<IResource> { new ResourceModel { HaveResourceCount = 25 } };
+            _attack = 20;
         }
 
-        public override void DoAttack()
+        protected override float GetAttack()
         {
-            throw new NotImplementedException();
+            return _attack;
         }
     }
 }

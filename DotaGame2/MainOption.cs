@@ -103,13 +103,28 @@ namespace DotaGame2
 
         private bool DoAttack()
         {
-            var attackEvent = new AttackEvent();
-            var soliderCount = GetSoliderCount();
-            var enemyLife = attackEvent.UserAttack(soliderCount, _emenies.FirstOrDefault().Life);
+            var isOver = false;
+            foreach (var solider in _soliders)
+            {
+                var enemyLife = solider.DoAttack(_emenies.FirstOrDefault().Life);
+                _emenies.FirstOrDefault().Life = enemyLife;
+                if (enemyLife <= 0)
+                {
+                    isOver = true;
+                    break;
+                }
+                else
+                {
+                    isOver = false;
+                }
+            }
 
-            bool isOver = enemyLife <= 0;
-            _emenies.FirstOrDefault().Life = enemyLife;
-            if (!isOver)
+            if (isOver)
+            {
+                setGameSuccess();
+                SetGameOver();
+            }
+            else
             {
                 var attackTarget = GetAttackTarget();
                 if (attackTarget == null)
@@ -119,6 +134,7 @@ namespace DotaGame2
                 }
                 else
                 {
+                    var attackEvent = new AttackEvent();
                     var remainingLife = attackEvent.EnemyAttack(attackTarget._life);
                     SetAttackedStatus(attackTarget, remainingLife);
                 }
@@ -295,6 +311,11 @@ namespace DotaGame2
             }
 
             return isSuccessGenerateVillager;
+        }
+
+        private void setGameSuccess()
+        {
+            Console.WriteLine("You win!!");
         }
     }
 }
