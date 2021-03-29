@@ -11,16 +11,16 @@ namespace DotaGame2
 {
     public class MainOption
     {
-        public static List<IPerson> _villagers;
-        public static List<IPerson> _soliders;
+        public static List<Models.Villager.Base> _villagers;
+        public static List<Models.Solider.Base> _soliders;
         public static List<IResource> _resources;
         public static List<IEemeny> _emenies;
         public static LevelModel _level;
 
         public MainOption()
         {
-            _villagers = new List<IPerson>();
-            _soliders = new List<IPerson>();
+            _villagers = new List<Models.Villager.Base>();
+            _soliders = new List<Models.Solider.Base>();
             _resources = new List<IResource>()
             {
                 new ResourceModel
@@ -119,8 +119,8 @@ namespace DotaGame2
                 }
                 else
                 {
-                    //var remainingLife = attackEvent.EnemyAttack(attackTarget.Life);
-                    //SetAttackedStatus(attackTarget, remainingLife);
+                    var remainingLife = attackEvent.EnemyAttack(attackTarget._life);
+                    SetAttackedStatus(attackTarget, remainingLife);
                 }
             }
 
@@ -146,12 +146,18 @@ namespace DotaGame2
         {
             if (remainingLife <= 0)
             {
-                _soliders.Remove(attackTarget);
-                _villagers.Remove(attackTarget);
+                if (attackTarget.GetType() == typeof(Models.Villager.Base))
+                {
+                    _villagers.Remove(attackTarget as Models.Villager.Base);
+                }
+                else if (attackTarget.GetType() == typeof(Models.Solider.Base))
+                {
+                    _soliders.Remove(attackTarget as Models.Solider.Base);
+                }
             }
             else
             {
-                //attackTarget.Life = remainingLife;
+                attackTarget._life = remainingLife;
             }
         }
 
@@ -210,19 +216,18 @@ namespace DotaGame2
 
         private int GetCollectionVillagers()
         {
-            //var canCollectResourceCount = _villagers.Count(x => !x.IsCollected);
-            //foreach (var villager in _villagers)
-            //{
-            //    SetVillagerCollectStatus(villager);
-            //}
+            var canCollectResourceCount = _villagers.Count(x => !x.IsCollected);
+            foreach (var villager in _villagers)
+            {
+                SetVillagerCollectStatus(villager);
+            }
 
-            //return canCollectResourceCount;
-            throw new NotImplementedException();
+            return canCollectResourceCount;
         }
 
-        private void SetVillagerCollectStatus(IPerson villager)
+        private void SetVillagerCollectStatus(Models.Villager.Base villager)
         {
-            //villager.IsCollected = !villager.IsCollected;
+            villager.IsCollected = !villager.IsCollected;
         }
 
         private int GetSoliderCount()

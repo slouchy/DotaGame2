@@ -10,7 +10,7 @@ namespace DotaGame2.Models.Villager
         public Guid _id { get; } = Guid.NewGuid();
         public float _life { get; set; }
         public List<IResource> _cost { get; set; }
-        public int CollectStatus { get; set; } = 0;
+        public bool IsCollected { get; set; } = false;
 
         public abstract void DoCollect();
     }
